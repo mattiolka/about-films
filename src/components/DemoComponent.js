@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import banner1 from '../images/banner1.jpg';
 import banner2 from '../images/banner2.jpg';
 import banner3 from '../images/banner3.jpg';
 import banner4 from '../images/banner4.jpg';
-import {Button, Container, Nav, Navbar} from 'react-bootstrap';
+import {Button, Col, Container, Nav, Navbar, Row} from 'react-bootstrap';
 
 const Icon = ({icon, className}) => {
   return (
@@ -309,6 +309,62 @@ const Contacts = () => (
   </section>
 );
 
+const makeApiLink = (command, lang = 'uk') => {
+  const host = `https://api.themoviedb.org/3`;
+  return `${host}${command}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=${lang}`;
+}
+
+const FilmsList = ({onClick, count1, count2}) => {
+  const [posterPrefix, setPosterPrefix] = useState();
+  const [films, setFilms] = useState([]);
+
+  useEffect(() => {
+    const url = makeApiLink('/trending/movie/day');
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => setFilms(data.results));
+  }, []);
+
+  useEffect(() => {
+    const url = makeApiLink('/configuration');
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => setPosterPrefix(data.images.base_url + data.images.poster_sizes[1]));
+  }, []);
+
+  useEffect(() => {
+    console.log(films);
+  }, [films]);
+
+  return <Container className={'my-4'}>
+    <Row>
+      <Col>
+        <h2 className={'mb-4'}>Trending Films</h2>
+        {
+          films.length === 0
+              ? <p>Loading..</p>
+              : <>
+                {films.map(film =>
+                    <Row className={'mb-4'}>
+                      <Col sm={6} md={3}>{posterPrefix ? <img src={posterPrefix + film.poster_path}/> : null}</Col>
+                      <Col>
+                        <h4>{film.title} ({film.release_date.substr(0, 4)})</h4>
+                        <p>{film.overview}</p>
+                        <p><b>
+                          Оцiнка: {film.vote_average} / 10 <span style={{opacity: 0.5}}>(Проголосувало: {film.vote_count})</span>
+                        </b></p>
+                      </Col>
+                    </Row>
+                )}
+              </>
+        }
+      </Col>
+    </Row>
+  </Container>;
+}
+
 const DemoComponent = () => {
   return (
     <>
@@ -316,7 +372,10 @@ const DemoComponent = () => {
         <Navigation />
       </header>
       <Breadcrumbs />
-      <Contacts />
+
+      {/*<Contacts />*/}
+      <FilmsList />
+
       <footer className='w3l-footer'>
         <section className='footer-inner-main'>
           <div className='footer-hny-grids py-5'>
