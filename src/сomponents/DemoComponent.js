@@ -3,7 +3,8 @@ import banner1 from '../images/banner1.jpg';
 import banner2 from '../images/banner2.jpg';
 import banner3 from '../images/banner3.jpg';
 import banner4 from '../images/banner4.jpg';
-import {Button, Navbar} from 'react-bootstrap';
+import {Button, Nav, Navbar} from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 
 const Breadcrumbs = () => (
   <div className='w3l-breadcrumbs'>
@@ -245,81 +246,9 @@ const SearchRight = () => (
   </div>
 );
 
-const NavigationHTML = () => (
-  <nav className='navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3'>
-    <div className='container'>
-      <h1>
-        <a className='navbar-brand' href='index.html'>
-          <Icon icon={'play'} className={'icon-log'} />
-          ProShowz{' '}
-        </a>
-      </h1>
-      {/* if logo is image enable this
-             <a className="navbar-brand" href="#index.html">
-             <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-             </a> */}
-      <button
-        className='navbar-toggler collapsed'
-        type='button'
-        data-toggle='collapse'
-        data-target='#navbarSupportedContent'
-        aria-controls='navbarSupportedContent'
-        aria-expanded='false'
-        aria-label='Toggle navigation'
-      >
-        {/* <span className="navbar-toggler-icon"></span> */}
-        <Icon icon={'bars'} className={'icon-expan'} />
-        <Icon icon={'times'} className={'icon-close'} />
-      </button>
-
-      <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-        <ul className='navbar-nav ml-auto'>
-          <li className='nav-item'>
-            <a className='nav-link' href='index.html'>
-              Home
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='nav-link' href='about.html'>
-              About
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='nav-link' href='genre.html'>
-              Genre
-            </a>
-          </li>
-          <li className='nav-item active'>
-            <a className='nav-link' href='contact.html'>
-              Contact
-            </a>
-          </li>
-        </ul>
-
-        <SearchRight />
-      </div>
-      {/* toggle switch for light and dark theme */}
-      <div className='mobile-position'>
-        <nav className='navigation'>
-          <div className='theme-switch-wrapper'>
-            <label className='theme-switch' for='checkbox'>
-              <input type='checkbox' id='checkbox' />
-              <div className='mode-container'>
-                <i className='gg-sun'></i>
-                <i className='gg-moon'></i>
-              </div>
-            </label>
-          </div>
-        </nav>
-      </div>
-      {/* //toggle switch for light and dark theme */}
-    </div>
-  </nav>
-);
-
 const Navigation = () => (
-  <Navbar className='fill px-lg-0 py-0 px-3'>
-    <div className='container'>
+  <Navbar bg='light' expand='lg' className='px-lg-0 py-0 px-3'>
+    <Container>
       <h1>
         <Navbar.Brand href='index.html'>
           <Icon icon={'play'} className={'icon-log'} />
@@ -330,47 +259,29 @@ const Navigation = () => (
              <a className="navbar-brand" href="#index.html">
              <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
              </a> */}
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <button
-        className='navbar-toggler collapsed'
-        type='button'
-        data-toggle='collapse'
-        data-target='#navbarSupportedContent'
-        aria-controls='navbarSupportedContent'
-        aria-expanded='false'
-        aria-label='Toggle navigation'
-      >
-        {/* <span className="navbar-toggler-icon"></span> */}
-        <Icon icon={'bars'} className={'icon-expan'} />
+      <Navbar.Toggle>
+        <Icon icon={'bars'} className={'icon-expand'} />
         <Icon icon={'times'} className={'icon-close'} />
-      </button>
+      </Navbar.Toggle>
 
-      <div className='collapse navbar-collapse' id='navbarSupportedContent'>
-        <ul className='navbar-nav ml-auto'>
-          <li className='nav-item'>
-            <a className='nav-link' href='index.html'>
-              Home
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='nav-link' href='about.html'>
-              About
-            </a>
-          </li>
-          <li className='nav-item'>
-            <a className='nav-link' href='genre.html'>
-              Genre
-            </a>
-          </li>
-          <li className='nav-item active'>
-            <a className='nav-link' href='contact.html'>
-              Contact
-            </a>
-          </li>
-        </ul>
+      <Navbar.Collapse>
+        <Nav className='ml-auto'>
+          <Nav.Link className='nav-link' href='index.html'>
+            Home
+          </Nav.Link>
+          <Nav.Link className='nav-link' href='about.html'>
+            About
+          </Nav.Link>
+          <Nav.Link className='nav-link' href='genre.html'>
+            Genre
+          </Nav.Link>
+          <Nav.Link className='nav-link' href='contact.html'>
+            Contact
+          </Nav.Link>
+        </Nav>
 
         <SearchRight />
-      </div>
+      </Navbar.Collapse>
       {/* toggle switch for light and dark theme */}
       <div className='mobile-position'>
         <nav className='navigation'>
@@ -386,7 +297,7 @@ const Navigation = () => (
         </nav>
       </div>
       {/* //toggle switch for light and dark theme */}
-    </div>
+    </Container>
   </Navbar>
 );
 
@@ -394,13 +305,8 @@ const DemoComponent = () => {
   return (
     <>
       <header id='site-header' className='w3l-header fixed-top'>
-        <NavigationHTML />
         <Navigation />
       </header>
-      <br />
-      <br />
-      <br />
-
       <Breadcrumbs />
       <Contacts />
       <footer className='w3l-footer'>
