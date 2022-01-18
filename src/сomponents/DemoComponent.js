@@ -8,14 +8,14 @@ import Container from 'react-bootstrap/Container';
 
 const Breadcrumbs = () => (
   <div className='w3l-breadcrumbs'>
-    <nav id='breadcrumbs' className='breadcrumbs'>
-      <div className='container page-wrapper'>
+    <Nav id='breadcrumbs' className='breadcrumbs'>
+      <Container className='page-wrapper'>
         <a href='index.html'>Home</a> »{' '}
         <span className='breadcrumb_last' aria-current='page'>
           Contact
         </span>
-      </div>
-    </nav>
+      </Container>
+    </Nav>
   </div>
 );
 
@@ -232,8 +232,8 @@ const Icon = ({icon, className}) => {
   );
 };
 
-const SearchRight = () => (
-  <div className='search-right'>
+const SearchButton = () => {
+  return (
     <Button
       variant='danger'
       href='#search'
@@ -242,9 +242,26 @@ const SearchRight = () => (
       Search
       <Icon icon={'search'} className={'ml-3'} />
     </Button>
-    <SearchPopup />
-  </div>
-);
+  );
+};
+
+const ToggleThene = () => {
+  return (
+    <div className='mobile-position'>
+      <Nav>
+        <div className='theme-switch-wrapper'>
+          <label className='theme-switch' for='checkbox'>
+            <input type='checkbox' id='checkbox' onChange={}/>
+            <div className='mode-container'>
+              <i className='gg-sun'></i>
+              <i className='gg-moon'></i>
+            </div>
+          </label>
+        </div>
+      </Nav>
+    </div>
+  );
+};
 
 const Navigation = () => (
   <Navbar bg='light' expand='lg' className='px-lg-0 py-0 px-3'>
@@ -266,37 +283,18 @@ const Navigation = () => (
 
       <Navbar.Collapse>
         <Nav className='ml-auto'>
-          <Nav.Link className='nav-link' href='index.html'>
-            Home
-          </Nav.Link>
-          <Nav.Link className='nav-link' href='about.html'>
-            About
-          </Nav.Link>
-          <Nav.Link className='nav-link' href='genre.html'>
-            Genre
-          </Nav.Link>
-          <Nav.Link className='nav-link' href='contact.html'>
-            Contact
-          </Nav.Link>
+          <Nav.Link href='index.html'> Home </Nav.Link>
+          <Nav.Link href='about.html'>About</Nav.Link>
+          <Nav.Link href='genre.html'>Genre</Nav.Link>
+          <Nav.Link href='contact.html'>Contact</Nav.Link>
         </Nav>
 
-        <SearchRight />
+        <div className='search-right'>
+          <SearchButton />
+          <SearchPopup />
+        </div>
       </Navbar.Collapse>
-      {/* toggle switch for light and dark theme */}
-      <div className='mobile-position'>
-        <nav className='navigation'>
-          <div className='theme-switch-wrapper'>
-            <label className='theme-switch' for='checkbox'>
-              <input type='checkbox' id='checkbox' />
-              <div className='mode-container'>
-                <i className='gg-sun'></i>
-                <i className='gg-moon'></i>
-              </div>
-            </label>
-          </div>
-        </nav>
-      </div>
-      {/* //toggle switch for light and dark theme */}
+      <ToggleThene />
     </Container>
   </Navbar>
 );
@@ -432,7 +430,7 @@ const DemoComponent = () => {
           </div>
 
           <div className='below-section'>
-            <div className='container'>
+            <Container>
               <div className='copyright-footer'>
                 <div className='columns text-lg-left'>
                   <p>
@@ -464,7 +462,7 @@ const DemoComponent = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </Container>
           </div>
           {/* copyright */}
           {/* move top */}
