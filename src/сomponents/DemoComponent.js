@@ -84,7 +84,7 @@ const Contacts = () => (
                 />
               </div>
               <div className='submithny text-right mt-4'>
-                <button className='btn read-button'>Submit Message</button>
+                <Button className='read-button'>Submit Message</Button>
               </div>
             </Form>
           </div>
@@ -158,9 +158,9 @@ const SearchPopup = () => (
           required='required'
           autofocus=''
         />
-        <button type='submit' className='btn'>
+        <Button type='submit'>
           <Icon icon={'search'} />
-        </button>
+        </Button>
       </form>
       <div className='browse-items'>
         <h3 className='hny-title two mt-md-5 mt-4'>Browse all:</h3>
@@ -272,7 +272,7 @@ const ToggleTheme = () => {
 };
 
 const Navigation = () => (
-  <Navbar bg='light' expand='lg' className='px-lg-0 py-0 px-3'>
+  <Navbar expand='lg' className='px-lg-0 py-0 px-3'>
     <Container>
       <h1>
         <Navbar.Brand href='index.html'>
