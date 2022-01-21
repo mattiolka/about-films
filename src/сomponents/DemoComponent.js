@@ -276,8 +276,7 @@ const Navigation = () => (
     <Container>
       <h1>
         <Navbar.Brand href='index.html'>
-          <Icon icon={'play'} className={'icon-log'} />
-          ProShowz{' '}
+          <Icon icon={'play'} className={'icon-log'} /> ProShowz
         </Navbar.Brand>
       </h1>
       {/* if logo is image enable this
