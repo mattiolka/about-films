@@ -3,8 +3,7 @@ import banner1 from '../images/banner1.jpg';
 import banner2 from '../images/banner2.jpg';
 import banner3 from '../images/banner3.jpg';
 import banner4 from '../images/banner4.jpg';
-import {Button, Nav, Navbar} from 'react-bootstrap';
-import Container from 'react-bootstrap/Container';
+import {Button, Col, Form, Nav, Navbar, Row, Container} from 'react-bootstrap';
 
 const Breadcrumbs = () => (
   <div className='w3l-breadcrumbs'>
@@ -22,7 +21,7 @@ const Breadcrumbs = () => (
 const Contacts = () => (
   <section className='w3l-contact-1'>
     <div className='contacts-9 py-5'>
-      <div className='container py-lg-4'>
+      <Container className='py-lg-4'>
         <div className='headerhny-title text-center'>
           <h4 className='sub-title text-center'>Contact us</h4>
           <h3 className='hny-title mb-0'>Leave a Message</h3>
@@ -33,7 +32,7 @@ const Contacts = () => (
         </div>
         <div className='contact-view mt-lg-5 mt-4'>
           <div className='conhny-form-section'>
-            <form
+            <Form
               action='https://sendmail.w3layouts.com/submitForm'
               method='post'
               className='formhny-sec'
@@ -87,7 +86,7 @@ const Contacts = () => (
               <div className='submithny text-right mt-4'>
                 <button className='btn read-button'>Submit Message</button>
               </div>
-            </form>
+            </Form>
           </div>
 
           <div className='d-grid contact-addres-inf mt-5 pt-lg-4'>
@@ -136,14 +135,14 @@ const Contacts = () => (
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
     <div className='contact-map'>
       <iframe
         src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.305935303!2d-74.25986548248684!3d40.69714941932609!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sin!4v1563262564932!5m2!1sen!2sin'
         style={{border: 0}}
         allowfullscreen=''
-      ></iframe>
+      />
     </div>
   </section>
 );
@@ -245,13 +244,22 @@ const SearchButton = () => {
   );
 };
 
-const ToggleThene = () => {
+const ToggleTheme = () => {
+  const toggleTheme = (event) => {
+    const isChecked = event.target.checked;
+
+    document
+      .getElementsByTagName('html')[0]
+      .setAttribute('data-theme', isChecked ? 'dark' : 'light');
+    console.info(isChecked);
+  };
+
   return (
     <div className='mobile-position'>
       <Nav>
         <div className='theme-switch-wrapper'>
           <label className='theme-switch' for='checkbox'>
-            <input type='checkbox' id='checkbox' onChange={}/>
+            <input type='checkbox' id='checkbox' onChange={toggleTheme} />
             <div className='mode-container'>
               <i className='gg-sun'></i>
               <i className='gg-moon'></i>
@@ -294,7 +302,7 @@ const Navigation = () => (
           <SearchPopup />
         </div>
       </Navbar.Collapse>
-      <ToggleThene />
+      <ToggleTheme />
     </Container>
   </Navbar>
 );
@@ -309,34 +317,34 @@ const DemoComponent = () => {
       <Contacts />
       <footer className='w3l-footer'>
         <section className='footer-inner-main'>
-          <div className='footer-hny-grids py-5'>
-            <div className='container py-lg-4'>
+          <Container className='footer-hny-grids py-5'>
+            <Container className='container py-lg-4'>
               <div className='text-txt'>
                 <div className='right-side'>
-                  <div className='row footer-about'>
-                    <div className='col-md-3 col-6 footer-img mb-lg-0 mb-4'>
+                  <Row className='footer-about'>
+                    <Col md={3} xs={6} className='footer-img mb-lg-0 mb-4'>
                       <a href='articles.html'>
                         <img className='img-fluid' src={banner1} alt='' />
                       </a>
-                    </div>
-                    <div className='col-md-3 col-6 footer-img mb-lg-0 mb-4'>
+                    </Col>
+                    <Col md={3} xs={6} className='footer-img mb-lg-0 mb-4'>
                       <a href='articles.html'>
                         <img className='img-fluid' src={banner2} alt='' />
                       </a>
-                    </div>
-                    <div className='col-md-3 col-6 footer-img mb-lg-0 mb-4'>
+                    </Col>
+                    <Col md={3} xs={6} className='footer-img mb-lg-0 mb-4'>
                       <a href='articles.html'>
                         <img className='img-fluid' src={banner3} alt='' />
                       </a>
-                    </div>
-                    <div className='col-md-3 col-6 footer-img mb-lg-0 mb-4'>
+                    </Col>
+                    <Col md={3} xs={6} className='footer-img mb-lg-0 mb-4'>
                       <a href='articles.html'>
                         <img className='img-fluid' src={banner4} alt='' />
                       </a>
-                    </div>
-                  </div>
-                  <div className='row footer-links'>
-                    <div className='col-md-3 col-sm-6 sub-two-right mt-5'>
+                    </Col>
+                  </Row>
+                  <Row className='footer-links'>
+                    <Col md={3} xs={6} className='sub-two-right mt-5'>
                       <h6>Movies</h6>
                       <ul>
                         <li>
@@ -358,8 +366,8 @@ const DemoComponent = () => {
                           <a href='contact.html'>Contact Us</a>
                         </li>
                       </ul>
-                    </div>
-                    <div className='col-md-3 col-sm-6 sub-two-right mt-5'>
+                    </Col>
+                    <Col md={3} xs={6} className='sub-two-right mt-5'>
                       <h6>Information</h6>
                       <ul>
                         <li>
@@ -381,8 +389,8 @@ const DemoComponent = () => {
                           <a href='contact.html'>Contact</a>
                         </li>
                       </ul>
-                    </div>
-                    <div className='col-md-3 col-sm-6 sub-two-right mt-5'>
+                    </Col>
+                    <Col md={3} sm={6} className='sub-two-right mt-5'>
                       <h6>Locations</h6>
                       <ul>
                         <li>
@@ -404,30 +412,30 @@ const DemoComponent = () => {
                           <a href='genre.html'>United Kingdom</a>
                         </li>
                       </ul>
-                    </div>
-                    <div className='col-md-3 col-sm-6 sub-two-right mt-5'>
+                    </Col>
+                    <Col md={3} sm={6} className='sub-two-right mt-5'>
                       <h6>Newsletter</h6>
-                      <form action='#' className='subscribe mb-3' method='post'>
+                      <Form action='#' className='subscribe mb-3' method='post'>
                         <input
                           type='email'
                           name='email'
                           placeholder='Your Email Address'
                           required=''
                         />
-                        <button>
+                        <Button>
                           <Icon icon={'envelope-o'} />
-                        </button>
-                      </form>
+                        </Button>
+                      </Form>
                       <p>
                         Enter your email and receive the latest news, updates
                         and special offers from us.
                       </p>
-                    </div>
-                  </div>
+                    </Col>
+                  </Row>
                 </div>
               </div>
-            </div>
-          </div>
+            </Container>
+          </Container>
 
           <div className='below-section'>
             <Container>
@@ -466,9 +474,9 @@ const DemoComponent = () => {
           </div>
           {/* copyright */}
           {/* move top */}
-          <button onclick='topFunction()' id='movetop' title='Go to top'>
+          <Button onClick={() => {}} id='movetop' title='Go to top'>
             <Icon icon={'arrow-up'} />
-          </button>
+          </Button>
           {/* /move top */}
         </section>
       </footer>
