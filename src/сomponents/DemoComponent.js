@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import banner1 from '../images/banner1.jpg';
 import banner2 from '../images/banner2.jpg';
 import banner3 from '../images/banner3.jpg';
@@ -9,7 +9,7 @@ const Breadcrumbs = () => (
   <div className='w3l-breadcrumbs'>
     <Nav id='breadcrumbs' className='breadcrumbs'>
       <Container className='page-wrapper'>
-        <a href='index.html'>Home</a> »{' '}
+        <a href='index.html'> Home </a>{' '}
         <span className='breadcrumb_last' aria-current='page'>
           Contact
         </span>
@@ -306,14 +306,66 @@ const Navigation = () => (
   </Navbar>
 );
 
+const makeLink = (command, lang = 'uk') => {
+  const host = 'https://api.themoviedb.org/3';
+  return `${host}${command}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=${lang}`;
+};
+
+const FilmsList = ({onClick, count, count2}) => {
+  const [films, setFilms] = useState([]);
+
+  useEffect(() => {
+    const url = makeLink('/trending/movie/day');
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => setFilms(data.results));
+  }, []);
+
+  console.log('!!!!КОМПОНЕТ ОБНОВЛЕН');
+
+  return (
+    <Container>
+      <Row className={'my-4'}>
+        <Col>
+          <h2> Trending Films </h2>
+          {films.length === 0 ? (
+            <p> Loading...</p>
+          ) : (
+            <ul>
+              {films.map((film) => (
+                <li>{film.title}</li>
+              ))}
+            </ul>
+          )}
+        </Col>
+      </Row>
+    </Container>
+  );
+};
+
 const DemoComponent = () => {
+  const [count, setCount] = useState(0);
+  const [count2, setCount2] = useState(0);
+
   return (
     <>
       <header id='site-header' className='w3l-header fixed-top'>
         <Navigation />
       </header>
+
       <Breadcrumbs />
-      <Contacts />
+      {/*<Contacts />*/}
+      <Button onClick={() => setCount((i) => i + 1)}> ADD to 1({count})</Button>
+      <Button onClick={() => setCount2((i) => i + 1)}>
+        {' '}
+        ADD to 2({count2})
+      </Button>
+      <FilmsList
+        onClick={() => console.log('hello')}
+        count1={count}
+        count2={count2}
+      />
+
       <footer className='w3l-footer'>
         <section className='footer-inner-main'>
           <Container className='footer-hny-grids py-5'>
