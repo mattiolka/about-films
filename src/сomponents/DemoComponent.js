@@ -306,20 +306,30 @@ const Navigation = () => (
   </Navbar>
 );
 
-const makeLink = (command, lang = 'uk') => {
+const makeApiLink = (command, lang = 'uk') => {
   const host = 'https://api.themoviedb.org/3';
   return `${host}${command}?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=${lang}`;
 };
 
 const FilmsList = ({onClick, count, count2}) => {
+  const [posterPrefix, setPosterPrefix] = useState('');
   const [films, setFilms] = useState([]);
 
   useEffect(() => {
-    const url = makeLink('/trending/movie/day');
+    const url = makeApiLink('/trending/movie/day');
     fetch(url)
       .then((response) => response.json())
       .then((data) => setFilms(data.results));
   }, []);
+
+  useEffect(() => {
+    const url = makeApiLink('/configuration');
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) =>
+        setPosterPrefix(data.images.base_url + data.images.poster_sizes[1])
+      );
+  });
 
   console.log('!!!!КОМПОНЕТ ОБНОВЛЕН');
 
@@ -331,11 +341,18 @@ const FilmsList = ({onClick, count, count2}) => {
           {films.length === 0 ? (
             <p> Loading...</p>
           ) : (
-            <ul>
+            <>
               {films.map((film) => (
-                <li>{film.title}</li>
+                <Row className={'mb-4'}>
+                  <Col ms={6} md={2}>
+                    {posterPrefix ? (
+                      <img src={posterPrefix + film.poster_path} />
+                    ) : null}
+                  </Col>
+                  <Col>{film.title}</Col>
+                </Row>
               ))}
-            </ul>
+            </>
           )}
         </Col>
       </Row>
